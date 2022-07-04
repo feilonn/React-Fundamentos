@@ -1,4 +1,7 @@
 const DescriptionWithLink = (props) => {
+
+    if(!props.description) { return null; }
+
     return (
         <>
             <p>{props.description}</p>
