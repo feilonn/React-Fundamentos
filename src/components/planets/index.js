@@ -1,54 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Planet from './planet'
 
-// const clickPlanet = (name) => {
-//     alert(`Clique no planeta ${name}`);
-// }
 
 async function getPlanets() {
     let response = await fetch('http://localhost:3000/api/planets.json');
     let data = await response.json()
 
+    // console.log(data);
     return data;
 }
 
-class Planets extends React.Component {
+const Planets = () => {
+    // [estado, método que altera o estado]
+    const [planets, setPlanets] = useState([])
 
-    constructor(props) {
-        super(props);
-        //Estado inicial
-        this.state = {
-            planets: []
-        }
-    }
-
-    componentDidMount() {
+    useEffect(() => {
         getPlanets().then(data => {
-            this.setState(() => ({
-                planets: data['planets']
-            }))
-            // this.state.planets = data['planets'];
+           setPlanets(data['planets'])
         })
-    }
+    }, [])
 
-    render() {
-        return (
-            <>
-                <h3>Planetas</h3>
-                <hr></hr>
-                {this.state.planets.map((planet) =>
-                    <Planet
-                        id={planet.id}
-                        name={planet.name}
-                        description={planet.description}
-                        link={planet.link}
-                        image_url={planet.img_url}
-                    />
-                )}
-            </>
-        )
-    }
-
+    return (
+        <>
+            <h3>Planetas</h3>
+            <hr></hr>
+            {planets.map((planet) =>
+                <Planet
+                    id={planet.id}
+                    name={planet.name}
+                    description={planet.description}
+                    link={planet.link}
+                    image_url={planet.img_url}
+                />
+            )}
+        </>
+    )
 }
 
 export default Planets;
