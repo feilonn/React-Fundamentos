@@ -1,7 +1,6 @@
 import GrayImage from '../../shared/gray_image'
 import DescriptionWithLink from '../../shared/decription_link'
 import React, { useState, useEffect } from 'react';
-import userEvent from '@testing-library/user-event';
 
 async function getSatellite(id) {
     let response = await fetch(`http://localhost:3000/api/${id}.json`)
