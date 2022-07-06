@@ -1,9 +1,9 @@
-import Planets from './components/planets'
+import Routers from './routes';
 
 function App() {
   return (
     <div>
-      <Planets/>
+      <Routers/>
     </div>
   );
 }
